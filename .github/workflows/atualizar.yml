@@ -1,0 +1,26 @@
+name: Atualizar cotação do boi
+on:
+  schedule:
+    - cron: "15 10 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar repositório
+        uses: actions/checkout@v4
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Consultar cotações uma vez por dia
+        run: python atualizar_cotacoes.py
+      - name: Salvar cotações atualizadas
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cotacoes.json
+          git diff --cached --quiet || git commit -m "Atualiza cotações diárias"
+          git push
