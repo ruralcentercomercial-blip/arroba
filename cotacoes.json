@@ -1,0 +1,168 @@
+{
+  "atualizado_em": null,
+  "fonte": "AgroDoc AI",
+  "cotacoes": [
+    {
+      "uf": "AC",
+      "estado": "Acre",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "AL",
+      "estado": "Alagoas",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "AP",
+      "estado": "Amapá",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "AM",
+      "estado": "Amazonas",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "BA",
+      "estado": "Bahia",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "CE",
+      "estado": "Ceará",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "DF",
+      "estado": "Distrito Federal",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "ES",
+      "estado": "Espírito Santo",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "GO",
+      "estado": "Goiás",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "MA",
+      "estado": "Maranhão",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "MT",
+      "estado": "Mato Grosso",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "MS",
+      "estado": "Mato Grosso do Sul",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "MG",
+      "estado": "Minas Gerais",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "PA",
+      "estado": "Pará",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "PB",
+      "estado": "Paraíba",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "PR",
+      "estado": "Paraná",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "PE",
+      "estado": "Pernambuco",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "PI",
+      "estado": "Piauí",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "RJ",
+      "estado": "Rio de Janeiro",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "RN",
+      "estado": "Rio Grande do Norte",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "RS",
+      "estado": "Rio Grande do Sul",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "RO",
+      "estado": "Rondônia",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "RR",
+      "estado": "Roraima",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "SC",
+      "estado": "Santa Catarina",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "SP",
+      "estado": "São Paulo",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "SE",
+      "estado": "Sergipe",
+      "valor": null,
+      "data_cotacao": null
+    },
+    {
+      "uf": "TO",
+      "estado": "Tocantins",
+      "valor": null,
+      "data_cotacao": null
+    }
+  ]
+}

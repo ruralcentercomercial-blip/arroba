@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cotação do Boi Gordo por Estado | Rural Center</title>
+<style>
+:root{--verde:#28552d;--verde2:#3b7040;--fundo:#f5f7f4;--borda:#dfe6dd;--texto:#202820;--muted:#647064}
+*{box-sizing:border-box}
+body{margin:0;padding:18px;background:transparent;color:var(--texto);font-family:Arial,Helvetica,sans-serif}
+.wrap{max-width:1000px;margin:0 auto}
+.header{background:var(--verde);color:#fff;border-radius:12px 12px 0 0;padding:22px 24px}
+.kicker{font-size:12px;text-transform:uppercase;letter-spacing:1.3px;opacity:.85;margin-bottom:7px}
+h1{font-size:clamp(22px,3vw,30px);margin:0 0 7px;line-height:1.2}
+.sub{font-size:14px;opacity:.9}
+.toolbar{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap;background:#fff;padding:14px 18px;border:1px solid var(--borda);border-top:0}
+.status{font-size:12px;color:var(--muted)}
+.search{padding:10px 12px;border:1px solid #cbd5c9;border-radius:7px;font-size:14px;max-width:240px;width:100%}
+.tablebox{overflow-x:auto;background:#fff;border:1px solid var(--borda);border-top:0;border-radius:0 0 12px 12px}
+table{border-collapse:collapse;width:100%;min-width:420px}
+thead{background:#edf3eb;color:#294f2d}
+th,td{text-align:left;padding:13px 18px;border-bottom:1px solid #e8ede6;font-size:14px}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.45px}
+td.price{text-align:right;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+th:last-child{text-align:right}
+tbody tr:hover{background:#f8faf7}
+tbody tr:last-child td{border-bottom:0}
+.uf{font-weight:700;color:var(--verde);width:70px}
+.note{font-size:11px;line-height:1.5;color:var(--muted);margin:12px 2px 0}
+.empty{padding:24px;text-align:center;color:var(--muted)}
+@media(max-width:520px){body{padding:8px}.header{padding:18px}.toolbar{padding:12px}.search{max-width:none}th,td{padding:12px 10px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="header">
+    <div class="kicker">Mercado pecuário</div>
+    <h1>Cotação do boi gordo por estado</h1>
+    <div class="sub">Valores indicativos em reais por arroba (R$/@)</div>
+  </header>
+  <div class="toolbar">
+    <div id="status" class="status">Carregando cotações salvas…</div>
+    <input id="filtro" class="search" type="search" placeholder="Buscar estado ou UF…" aria-label="Buscar estado ou UF">
+  </div>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>Estado</th><th>UF</th><th>Preço por arroba</th></tr></thead>
+      <tbody id="linhas"><tr><td colspan="3" class="empty">Carregando…</td></tr></tbody>
+    </table>
+  </div>
+  <p class="note">Fonte: AgroDoc AI. Cotações indicativas, sujeitas à metodologia e à atualização da fonte. A tabela é atualizada automaticamente uma vez ao dia; confira a data de cada cotação. Não constitui oferta de compra ou venda.</p>
+</div>
+<script>
+(function(){
+ const nomes={AC:"Acre",AL:"Alagoas",AP:"Amapá",AM:"Amazonas",BA:"Bahia",CE:"Ceará",DF:"Distrito Federal",ES:"Espírito Santo",GO:"Goiás",MA:"Maranhão",MT:"Mato Grosso",MS:"Mato Grosso do Sul",MG:"Minas Gerais",PA:"Pará",PB:"Paraíba",PR:"Paraná",PE:"Pernambuco",PI:"Piauí",RJ:"Rio de Janeiro",RN:"Rio Grande do Norte",RS:"Rio Grande do Sul",RO:"Rondônia",RR:"Roraima",SC:"Santa Catarina",SP:"São Paulo",SE:"Sergipe",TO:"Tocantins"};
+ let registros=[];
+ const fmt=v=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(v);
+ function render(){
+   const q=(document.getElementById('filtro').value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+   const filtrados=registros.filter(x=>(x.estado+' '+x.uf).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().includes(q));
+   const tbody=document.getElementById('linhas');
+   if(!filtrados.length){tbody.innerHTML='<tr><td colspan="3" class="empty">Nenhum estado encontrado.</td></tr>';return;}
+   tbody.innerHTML=filtrados.map(x=>'<tr><td>'+x.estado+'</td><td class="uf">'+x.uf+'</td><td class="price">'+(typeof x.valor==='number'?fmt(x.valor):'—')+'</td></tr>').join('');
+ }
+ document.getElementById('filtro').addEventListener('input',render);
+ fetch('./cotacoes.json?v='+Date.now(),{cache:'no-store'})
+ .then(r=>{if(!r.ok)throw new Error('Arquivo de cotações não encontrado');return r.json()})
+ .then(d=>{
+   registros=(d.cotacoes||[]).map(x=>({uf:x.uf,estado:x.estado||nomes[x.uf]||x.uf,valor:typeof x.valor==='number'?x.valor:null,data:x.data_cotacao||null})).sort((a,b)=>a.estado.localeCompare(b.estado,'pt-BR'));
+   const data=d.atualizado_em?new Date(d.atualizado_em):null;
+   document.getElementById('status').textContent='Última atualização da tabela: '+(data&&!isNaN(data)?data.toLocaleString('pt-BR'):'aguardando primeira atualização');
+   if(!registros.length)throw new Error('Nenhuma cotação disponível no arquivo');
+   render();
+ })
+ .catch(e=>{document.getElementById('status').textContent='Não foi possível carregar as cotações.';document.getElementById('linhas').innerHTML='<tr><td colspan="3" class="empty">As cotações ainda não foram publicadas. Verifique a configuração do repositório.</td></tr>';});
+})();
+</script>
+</body>
+</html>
