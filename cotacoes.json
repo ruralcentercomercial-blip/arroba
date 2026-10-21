@@ -1,5 +1,5 @@
 {
-  "atualizado_em": null,
+  "atualizado_em": "2026-10-21T23:58:48.120551+00:00",
   "fonte": "AgroDoc AI",
   "cotacoes": [
     {
@@ -149,8 +149,9 @@
     {
       "uf": "SP",
       "estado": "São Paulo",
-      "valor": null,
-      "data_cotacao": null
+      "valor": 380.4,
+      "data_cotacao": "2026-10-21T19:58:47-04:00",
+      "fonte": "CEPEA/ESALQ · NoticiasAgricolas · Scot Consultoria"
     },
     {
       "uf": "SE",
