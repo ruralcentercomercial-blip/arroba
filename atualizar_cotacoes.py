@@ -1,52 +1,108 @@
-#!/usr/bin/env python3
-"""Atualiza uma vez ao dia as cotações por UF usando a API pública AgroDoc."""
-import json, os, urllib.request, urllib.error
+import json
+import urllib.request
 from datetime import datetime, timezone
 
-URL = "https://agrodocai.com.br/api/v1/cotacao?uf={uf}"
-UFS = ["AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"]
-NOMES = {"AC":"Acre","AL":"Alagoas","AP":"Amapá","AM":"Amazonas","BA":"Bahia","CE":"Ceará","DF":"Distrito Federal","ES":"Espírito Santo","GO":"Goiás","MA":"Maranhão","MT":"Mato Grosso","MS":"Mato Grosso do Sul","MG":"Minas Gerais","PA":"Pará","PB":"Paraíba","PR":"Paraná","PE":"Pernambuco","PI":"Piauí","RJ":"Rio de Janeiro","RN":"Rio Grande do Norte","RS":"Rio Grande do Sul","RO":"Rondônia","RR":"Roraima","SC":"Santa Catarina","SP":"São Paulo","SE":"Sergipe","TO":"Tocantins"}
+UFS = [
+    "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO",
+    "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI",
+    "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"
+]
 
-def get_json(url):
-    req=urllib.request.Request(url, headers={"User-Agent":"RuralCenterCotacao/1.0","Accept":"application/json"})
-    with urllib.request.urlopen(req, timeout=25) as response:
-        return json.loads(response.read().decode("utf-8"))
+NOMES = {
+    "AC":"Acre", "AL":"Alagoas", "AP":"Amapá", "AM":"Amazonas",
+    "BA":"Bahia", "CE":"Ceará", "DF":"Distrito Federal",
+    "ES":"Espírito Santo", "GO":"Goiás", "MA":"Maranhão",
+    "MT":"Mato Grosso", "MS":"Mato Grosso do Sul",
+    "MG":"Minas Gerais", "PA":"Pará", "PB":"Paraíba",
+    "PR":"Paraná", "PE":"Pernambuco", "PI":"Piauí",
+    "RJ":"Rio de Janeiro", "RN":"Rio Grande do Norte",
+    "RS":"Rio Grande do Sul", "RO":"Rondônia",
+    "RR":"Roraima", "SC":"Santa Catarina", "SP":"São Paulo",
+    "SE":"Sergipe", "TO":"Tocantins"
+}
+
+def consultar(uf):
+    url = f"https://agrodocai.com.br/api/v1/cotacao?uf={uf}"
+    req = urllib.request.Request(
+        url,
+        headers={"User-Agent": "RuralCenterCotacao/1.0"}
+    )
+    with urllib.request.urlopen(req, timeout=30) as resposta:
+        dados = json.loads(resposta.read().decode("utf-8"))
+
+    # Preço estadual vem dentro de boi_gordo_uf.preco
+    estadual = dados.get("boi_gordo_uf") or {}
+    valor = estadual.get("preco")
+
+    # Para SP, se não houver preço estadual, usa a referência CEPEA/SP
+    if valor is None and uf == "SP":
+        valor = dados.get("boi_gordo_cepea_sp")
+
+    if valor is not None:
+        return {
+            "uf": uf,
+            "estado": NOMES[uf],
+            "valor": float(valor),
+            "data_cotacao": dados.get("atualizado"),
+            "fonte": "AgroDoc AI"
+        }
+
+    return None
 
 def main():
-    path="cotacoes.json"
+    arquivo = "cotacoes.json"
+
     try:
-        with open(path,encoding="utf-8") as f:
-            previous=json.load(f)
+        with open(arquivo, encoding="utf-8") as f:
+            anterior = json.load(f)
     except (OSError, ValueError):
-        previous={"cotacoes":[]}
-    old={x.get("uf"):x for x in previous.get("cotacoes",[])}
-    out=[]
-    success=0
+        anterior = {"cotacoes": []}
+
+    antigos = {
+        item["uf"]: item
+        for item in anterior.get("cotacoes", [])
+    }
+
+    cotacoes = []
+    sucessos = 0
+
     for uf in UFS:
         try:
-            data=get_json(URL.format(uf=uf))
-            # A API documenta campos valor/uf/data_cotacao para consulta por UF.
-            valor=data.get("valor")
-            if valor is None:
-                # Algumas respostas podem devolver o valor no campo geral.
-                valor=data.get("boi_gordo_cepea_sp") if uf=="SP" else None
-            if isinstance(valor,(int,float)) and valor>0:
-                out.append({"uf":uf,"estado":NOMES[uf],"valor":float(valor),
-                            "data_cotacao":data.get("data_cotacao") or data.get("atualizado") or data.get("atualizado_em"),
-                            "fonte":data.get("fonte","AgroDoc AI")})
-                success+=1
+            item = consultar(uf)
+            if item:
+                cotacoes.append(item)
+                sucessos += 1
             else:
-                out.append(old.get(uf,{"uf":uf,"estado":NOMES[uf],"valor":None,"data_cotacao":None}))
-        except Exception as exc:
-            print(f"Falha em {uf}: {exc}")
-            out.append(old.get(uf,{"uf":uf,"estado":NOMES[uf],"valor":None,"data_cotacao":None}))
-    # Se a API falhar por completo, preserva o último arquivo válido.
-    if success == 0:
-        raise SystemExit("Nenhuma cotação válida retornada; arquivo anterior preservado.")
-    result={"atualizado_em":datetime.now(timezone.utc).isoformat(),"fonte":"AgroDoc AI","cotacoes":out}
-    with open(path,"w",encoding="utf-8") as f:
-        json.dump(result,f,ensure_ascii=False,indent=2)
-    print(f"Atualizadas {success} cotações de UF.")
+                cotacoes.append(antigos.get(uf, {
+                    "uf": uf,
+                    "estado": NOMES[uf],
+                    "valor": None,
+                    "data_cotacao": None
+                }))
+        except Exception as erro:
+            print(f"Falha em {uf}: {erro}")
+            cotacoes.append(antigos.get(uf, {
+                "uf": uf,
+                "estado": NOMES[uf],
+                "valor": None,
+                "data_cotacao": None
+            }))
 
-if __name__=="__main__":
+    if sucessos == 0:
+        raise RuntimeError(
+            "Nenhuma cotação válida recebida. Arquivo não atualizado."
+        )
+
+    resultado = {
+        "atualizado_em": datetime.now(timezone.utc).isoformat(),
+        "fonte": "AgroDoc AI",
+        "cotacoes": cotacoes
+    }
+
+    with open(arquivo, "w", encoding="utf-8") as f:
+        json.dump(resultado, f, ensure_ascii=False, indent=2)
+
+    print(f"Cotações recebidas com sucesso: {sucessos}")
+
+if __name__ == "__main__":
     main()
