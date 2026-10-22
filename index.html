@@ -63,7 +63,7 @@ tbody tr:last-child td{border-bottom:0}
    tbody.innerHTML=filtrados.map(x=>'<tr><td>'+x.estado+'</td><td class="uf">'+x.uf+'</td><td class="price">'+(typeof x.valor==='number'?fmt(x.valor):'—')+'</td></tr>').join('');
  }
  document.getElementById('filtro').addEventListener('input',render);
- fetch('./cotacoes.json?v='+Date.now(),{cache:'no-store'})
+ fetch('./tacos.json?v='+Date.now(),{cache:'no-store'})
  .then(r=>{if(!r.ok)throw new Error('Arquivo de cotações não encontrado');return r.json()})
  .then(d=>{
    registros=(d.cotacoes||[]).map(x=>({uf:x.uf,estado:x.estado||nomes[x.uf]||x.uf,valor:typeof x.valor==='number'?x.valor:null,data:x.data_cotacao||null})).sort((a,b)=>a.estado.localeCompare(b.estado,'pt-BR'));
