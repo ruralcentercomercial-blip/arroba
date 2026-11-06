@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-05T11:13:01.765401+00:00",
+  "atualizado_em": "2026-11-06T11:10:44.420633+00:00",
   "fonte": "AgroDoc AI",
   "cotacoes": [
     {
@@ -54,8 +54,8 @@
     {
       "uf": "GO",
       "estado": "Goiás",
-      "valor": 375.0,
-      "data_cotacao": "2026-11-05T07:12:56-04:00",
+      "valor": 377.0,
+      "data_cotacao": "2026-11-06T07:10:38-04:00",
       "fonte": "AgroDoc AI"
     },
     {
@@ -69,28 +69,28 @@
       "uf": "MT",
       "estado": "Mato Grosso",
       "valor": 370.0,
-      "data_cotacao": "2026-11-05T07:12:57-04:00",
+      "data_cotacao": "2026-11-06T07:10:38-04:00",
       "fonte": "AgroDoc AI"
     },
     {
       "uf": "MS",
       "estado": "Mato Grosso do Sul",
-      "valor": 385.0,
-      "data_cotacao": "2026-11-05T07:12:57-04:00",
+      "valor": 387.0,
+      "data_cotacao": "2026-11-06T07:10:39-04:00",
       "fonte": "AgroDoc AI"
     },
     {
       "uf": "MG",
       "estado": "Minas Gerais",
-      "valor": 385.0,
-      "data_cotacao": "2026-11-05T07:12:57-04:00",
+      "valor": 387.0,
+      "data_cotacao": "2026-11-06T07:10:39-04:00",
       "fonte": "AgroDoc AI"
     },
     {
       "uf": "PA",
       "estado": "Pará",
       "valor": 380.0,
-      "data_cotacao": "2026-11-05T07:12:57-04:00",
+      "data_cotacao": "2026-11-06T07:10:39-04:00",
       "fonte": "AgroDoc AI"
     },
     {
@@ -102,8 +102,8 @@
     {
       "uf": "PR",
       "estado": "Paraná",
-      "valor": 397.0,
-      "data_cotacao": "2026-11-05T07:12:58-04:00",
+      "valor": 400.0,
+      "data_cotacao": "2026-11-06T07:10:40-04:00",
       "fonte": "AgroDoc AI"
     },
     {
@@ -140,8 +140,8 @@
     {
       "uf": "RO",
       "estado": "Rondônia",
-      "valor": 365.0,
-      "data_cotacao": "2026-11-05T07:13:00-04:00",
+      "valor": 367.0,
+      "data_cotacao": "2026-11-06T07:10:42-04:00",
       "fonte": "AgroDoc AI"
     },
     {
@@ -160,7 +160,7 @@
       "uf": "SP",
       "estado": "São Paulo",
       "valor": 390.0,
-      "data_cotacao": "2026-11-05T07:13:01-04:00",
+      "data_cotacao": "2026-11-06T07:10:43-04:00",
       "fonte": "AgroDoc AI"
     },
     {
@@ -173,7 +173,7 @@
       "uf": "TO",
       "estado": "Tocantins",
       "valor": 375.0,
-      "data_cotacao": "2026-11-05T07:13:01-04:00",
+      "data_cotacao": "2026-11-06T07:10:44-04:00",
       "fonte": "AgroDoc AI"
     }
   ]
