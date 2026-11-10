@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-09T11:04:49.339245+00:00",
+  "atualizado_em": "2026-11-10T10:58:15.148865+00:00",
   "fonte": "AgroDoc AI",
   "cotacoes": [
     {
@@ -30,7 +30,7 @@
       "uf": "BA",
       "estado": "Bahia",
       "valor": 376.0,
-      "data_cotacao": "2026-11-08T06:50:53-04:00",
+      "data_cotacao": "2026-11-10T06:58:09-04:00",
       "fonte": "AgroDoc AI"
     },
     {
@@ -54,43 +54,43 @@
     {
       "uf": "GO",
       "estado": "Goiás",
-      "valor": 380.0,
-      "data_cotacao": "2026-11-09T07:04:42-04:00",
+      "valor": 405.3,
+      "data_cotacao": "2026-11-10T06:58:10-04:00",
       "fonte": "AgroDoc AI"
     },
     {
       "uf": "MA",
       "estado": "Maranhão",
       "valor": 371.0,
-      "data_cotacao": "2026-11-08T06:50:54-04:00",
+      "data_cotacao": "2026-11-10T06:58:11-04:00",
       "fonte": "AgroDoc AI"
     },
     {
       "uf": "MT",
       "estado": "Mato Grosso",
-      "valor": 370.0,
-      "data_cotacao": "2026-11-09T07:04:43-04:00",
+      "valor": 364.0,
+      "data_cotacao": "2026-11-10T06:58:11-04:00",
       "fonte": "AgroDoc AI"
     },
     {
       "uf": "MS",
       "estado": "Mato Grosso do Sul",
-      "valor": 387.0,
-      "data_cotacao": "2026-11-09T07:04:44-04:00",
+      "valor": 381.0,
+      "data_cotacao": "2026-11-10T06:58:11-04:00",
       "fonte": "AgroDoc AI"
     },
     {
       "uf": "MG",
       "estado": "Minas Gerais",
-      "valor": 387.0,
-      "data_cotacao": "2026-11-09T07:04:44-04:00",
+      "valor": 378.0,
+      "data_cotacao": "2026-11-10T06:58:11-04:00",
       "fonte": "AgroDoc AI"
     },
     {
       "uf": "PA",
       "estado": "Pará",
-      "valor": 380.0,
-      "data_cotacao": "2026-11-09T07:04:44-04:00",
+      "valor": 373.0,
+      "data_cotacao": "2026-11-10T06:58:11-04:00",
       "fonte": "AgroDoc AI"
     },
     {
@@ -102,8 +102,8 @@
     {
       "uf": "PR",
       "estado": "Paraná",
-      "valor": 400.0,
-      "data_cotacao": "2026-11-09T07:04:45-04:00",
+      "valor": 393.5,
+      "data_cotacao": "2026-11-10T06:58:12-04:00",
       "fonte": "AgroDoc AI"
     },
     {
@@ -134,14 +134,14 @@
       "uf": "RS",
       "estado": "Rio Grande do Sul",
       "valor": 382.5,
-      "data_cotacao": "2026-11-08T06:50:56-04:00",
+      "data_cotacao": "2026-11-10T06:58:13-04:00",
       "fonte": "AgroDoc AI"
     },
     {
       "uf": "RO",
       "estado": "Rondônia",
-      "valor": 367.0,
-      "data_cotacao": "2026-11-09T07:04:47-04:00",
+      "valor": 361.0,
+      "data_cotacao": "2026-11-10T06:58:13-04:00",
       "fonte": "AgroDoc AI"
     },
     {
@@ -159,8 +159,8 @@
     {
       "uf": "SP",
       "estado": "São Paulo",
-      "valor": 395.0,
-      "data_cotacao": "2026-11-09T07:04:48-04:00",
+      "valor": 386.0,
+      "data_cotacao": "2026-11-10T06:58:14-04:00",
       "fonte": "AgroDoc AI"
     },
     {
@@ -172,8 +172,8 @@
     {
       "uf": "TO",
       "estado": "Tocantins",
-      "valor": 377.0,
-      "data_cotacao": "2026-11-09T07:04:49-04:00",
+      "valor": 369.0,
+      "data_cotacao": "2026-11-10T06:58:15-04:00",
       "fonte": "AgroDoc AI"
     }
   ]
